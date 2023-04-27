@@ -7,6 +7,8 @@ using [skdman](https://sdkman.io/)  `sdk use java 11.0.8-amzn`
 ## Command input
 --input s3a://xxx/* --output s3a://xxxx/result.tsv --awsprofile xxxx
 
+using sbt `sbt "run --input s3a://xxx/* --output s3a://xxxx/result.tsv --awsprofile xxxx"`
+
 ## Algo
 for each file, we group by key, then for each key with sort the values.
 We traverse the values keeping only odd values (even + x = x => we do not need them).

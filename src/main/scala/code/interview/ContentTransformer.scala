@@ -18,6 +18,9 @@ object ContentTransformer {
           ( stringToInt(index), stringToInt(value) )
         case (index: String) ::  Nil =>
           ( stringToInt(index), 0 )
+        case (index: String) ::  (value: String) :: _ =>
+          // more than 2 values => error
+          ( stringToInt(index),  stringToInt(value) )
         case Nil =>
           ( 0, 0 )
       }
