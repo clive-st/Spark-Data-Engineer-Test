@@ -5,7 +5,7 @@ tested with jvm 11
 using [skdman](https://sdkman.io/)  `sdk use java 11.0.8-amzn`
 
 ## Command input
---input s3a://xxx/* --output s3a://xxxx/result.tsv --awsprofile xxxx
+--input s3a://xxx/* --output s3a://xxxx/result_tsv --awsprofile xxxx
 
 using sbt `sbt "run --input s3a://xxx/* --output s3a://xxxx/result_tsv --awsprofile xxxx"`
 
