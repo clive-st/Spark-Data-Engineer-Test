@@ -1,10 +1,8 @@
 package code.interview
 
 import com.amazonaws.auth.profile.ProfileCredentialsProvider
-import com.amazonaws.auth.{AWSCredentialsProvider, AWSCredentialsProviderChain, EnvironmentVariableCredentialsProvider}
-import org.apache.spark.rdd.RDD
+import com.amazonaws.auth.{AWSCredentialsProviderChain, EnvironmentVariableCredentialsProvider}
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.col
 import org.rogach.scallop.ScallopConf
 
 
@@ -40,8 +38,8 @@ object S3SparkApp {
     val result = rdd.map( ContentTransformer.transform).map(_.groupBy(_._1).mapValues(_.map(_._2))
       .toList).map( _.map(ServiceOddValues.filteringOddValues) ).reduce { ServiceOddValues.reduceKeepOnlyOddValues}
 
-    result.toDF().write.format("csv").option("delimiter", "\t").option("header", "false").mode("Overwrite")
-      .save(conf.output())
+    result.map{case (key, values) => (key, values.mkString(","))}.toDF().write.option("delimiter", "\t")
+      .option("header", "false").mode("Overwrite").csv(conf.output())
 
     spark.stop()
   }

@@ -1,6 +1,5 @@
 package code.interview
 
-import org.scalatest._
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
 
